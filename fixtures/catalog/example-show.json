@@ -1,0 +1,88 @@
+{
+  "slug": "test-show",
+  "title": "Test Show",
+  "tmdbId": 999001,
+  "dtddId": 12345,
+  "seriesWarnings": [
+    {
+      "id": "test-show-series-gore-topic",
+      "category": "gore",
+      "severity": "medium",
+      "channel": "video",
+      "scope": "series",
+      "note": "Crowdsourced report: the show has recurring gore across multiple seasons per DTDD users.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.6,
+        "addedAt": "2026-01-15T09:00:00.000Z",
+        "detail": "DTDD topic id 42 (Gore)",
+        "sourceRef": "https://www.doesthedogdie.com/media/999001"
+      }
+    }
+  ],
+  "seasons": [
+    {
+      "seasonNumber": 1,
+      "episodes": [
+        {
+          "episodeNumber": 1,
+          "title": "Pilot",
+          "tmdbId": 5551001,
+          "runtimeSec": 2640,
+          "reviewedClear": false,
+          "warnings": [
+            {
+              "id": "test-show-s01e01-vomit-01",
+              "category": "vomiting",
+              "severity": "high",
+              "channel": "both",
+              "scope": "episode",
+              "startFrac": 0.6098484848484849,
+              "endFrac": 0.6212121212121212,
+              "startSecAtSource": 1610,
+              "endSecAtSource": 1640,
+              "sourceDurationSec": 2640,
+              "note": "Character vomits on screen after eating spoiled food; retching audible before it's shown.",
+              "suppressed": false,
+              "provenance": {
+                "type": "subtitle-scan",
+                "confidence": 0.82,
+                "addedAt": "2026-02-01T18:30:00.000Z",
+                "detail": "Test.Show.S01E01.Pilot.720p.WEB.srt"
+              }
+            },
+            {
+              "id": "test-show-s01e01-gore-01",
+              "category": "gore",
+              "severity": "high",
+              "channel": "video",
+              "scope": "episode",
+              "startFrac": 0.8636363636363636,
+              "endFrac": 0.875,
+              "startSecAtSource": 2280,
+              "endSecAtSource": 2310,
+              "sourceDurationSec": 2640,
+              "note": "Graphic injury shown in close-up during the climax.",
+              "suppressed": false,
+              "provenance": {
+                "type": "curated",
+                "confidence": 0.95,
+                "addedAt": "2026-02-02T10:00:00.000Z",
+                "detail": "Manually confirmed by rewatching the scene."
+              }
+            }
+          ]
+        },
+        {
+          "episodeNumber": 2,
+          "title": "The Second One",
+          "tmdbId": 5551002,
+          "runtimeSec": 2580,
+          "reviewedClear": true,
+          "warnings": []
+        }
+      ]
+    }
+  ]
+}

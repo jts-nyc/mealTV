@@ -1,0 +1,28 @@
+{
+  "name": "mealtv",
+  "version": "0.1.0",
+  "description": "Personal tool to eat dinner while watching TV without being ambushed by gross content.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "mealtv": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:web": "echo \"not yet implemented\"",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^15.0.0",
+    "dotenv": "^17.4.2",
+    "subtitle": "^4.2.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "esbuild": "^0.28.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
