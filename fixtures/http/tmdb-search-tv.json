@@ -1,0 +1,29 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 999901,
+      "name": "The Gravy Train",
+      "original_name": "The Gravy Train",
+      "first_air_date": "2019-04-12",
+      "overview": "A wholly fictional prestige drama about a family-run roadside diner. Not a real show — used only as fixture data for mealTV's test suite.",
+      "origin_country": ["US"],
+      "popularity": 12.3,
+      "vote_average": 7.1,
+      "vote_count": 42
+    },
+    {
+      "id": 999902,
+      "name": "The Gravy Train: After Hours",
+      "original_name": "The Gravy Train: After Hours",
+      "first_air_date": "2022-09-01",
+      "overview": "A wholly fictional spin-off. Not a real show — used only as fixture data for mealTV's test suite.",
+      "origin_country": ["US"],
+      "popularity": 3.4,
+      "vote_average": 5.9,
+      "vote_count": 8
+    }
+  ],
+  "total_results": 2,
+  "total_pages": 1
+}

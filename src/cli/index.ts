@@ -14,6 +14,12 @@ import dotenv from "dotenv";
 import { getRepoRoot } from "../catalog/store.js";
 import { register as registerValidate } from "./commands/validate.js";
 import { register as registerBuildIndex } from "./commands/build-index.js";
+import { register as registerAddShow } from "./commands/add-show.js";
+import { register as registerFetchDtdd } from "./commands/fetch-dtdd.js";
+import { register as registerScanSubtitles } from "./commands/scan-subtitles.js";
+import { register as registerFetchSubtitles } from "./commands/fetch-subtitles.js";
+import { register as registerCurate } from "./commands/curate.js";
+import { register as registerImportLog } from "./commands/import-log.js";
 
 const repoRoot = getRepoRoot();
 
@@ -38,6 +44,12 @@ program
 
 registerValidate(program);
 registerBuildIndex(program);
+registerAddShow(program);
+registerFetchDtdd(program);
+registerScanSubtitles(program);
+registerFetchSubtitles(program);
+registerCurate(program);
+registerImportLog(program);
 
 program.parseAsync(process.argv).catch((err) => {
   console.error(err instanceof Error ? err.message : err);

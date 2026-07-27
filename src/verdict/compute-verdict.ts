@@ -8,20 +8,31 @@
  *
  * DESIGN NOTE — how series/season-level warnings affect the tier:
  * `scope: "series"` / `"season"` warnings (typically crowdsourced from Does
- * The Dog Die, with no timestamp) are folded into the same blocking/caution
- * evaluation as episode-scoped warnings, category-for-category. Concretely:
- * a series-level vomiting report still produces tier "block" (zero tolerance
- * doesn't get diluted just because nobody pinned the exact episode yet), and
- * a series-level gore report still produces "caution" the same as an
- * episode-level one would. The copy is written to stay honest about the
- * difference though — when the ONLY evidence is series/season-scoped, the
- * detail text says the exact scene/episode isn't known rather than implying
- * we found something specific in *this* episode. This also means a series or
- * season-level warning (unless suppressed) prevents `reviewedClear` alone
- * from producing a "reviewed-clear" verdict, since "no non-suppressed
- * warnings" is evaluated across both episode- and series-scoped evidence —
- * a human clearing this one episode doesn't erase a standing crowd report
- * about the show.
+ * The Dog Die, with no timestamp) are a statement about the SHOW, not about
+ * any one episode. They're folded into the same caution evaluation as
+ * episode-scoped warnings, category-for-category — a series-level gore
+ * report still produces "caution" the same as an episode-level one would,
+ * because caution is "your call" anyway. For the HARD_BLOCK category
+ * (vomiting) they still produce tier "block" by default (zero tolerance
+ * doesn't get diluted just because nobody pinned the exact episode yet) —
+ * *unless* a human has explicitly reviewed this specific episode.
+ *
+ * `episode.reviewedClear === true` means a person watched THIS episode and
+ * confirmed it's fine. That's better evidence about this episode than a
+ * crowd report about the show in general, so it overrides series/season-
+ * scope blocking evidence: if there are no non-suppressed EPISODE-scope
+ * warnings, the verdict is "reviewed-clear" even when series/season-scope
+ * warnings exist. Those series-level warnings are still returned in
+ * `seriesLevelWarnings` (so the UI can show them as "this show has reports
+ * elsewhere" context) and the reviewed-clear copy names them rather than
+ * pretending the show is spotless.
+ *
+ * An episode-scope hard-block warning, though, still wins over
+ * `reviewedClear` — see `computeVerdict` for why that contradiction resolves
+ * to "block" rather than being silently discarded. And review status has no
+ * effect on the caution tier at all: a caution-category warning (episode- or
+ * series-scoped) still produces "caution" regardless of `reviewedClear`,
+ * since caution was never a hard gate to begin with.
  */
 
 import type { Category, Episode, Severity, Warning } from "../schema/catalog.js";
@@ -116,6 +127,27 @@ function buildCautionCopy(cautionWarnings: Warning[]): { headline: string; detai
   return { headline, detail };
 }
 
+function buildReviewedClearCopy(seriesLevelWarnings: Warning[]): { headline: string; detail: string } {
+  const headline = "Reviewed clear";
+
+  if (seriesLevelWarnings.length === 0) {
+    return {
+      headline,
+      detail: "A person watched this episode and confirmed there's nothing on your warning list.",
+    };
+  }
+
+  // Honest, not spotless: a human cleared THIS episode, but the show still
+  // carries crowd reports elsewhere. Say both things rather than letting the
+  // "clear" headline imply the show has no reports at all.
+  const categories = [...new Set(seriesLevelWarnings.map((w) => categoryLabel(w.category)))];
+  const categoryText = categories.join(", ");
+  return {
+    headline,
+    detail: `A person watched this specific episode and confirmed it's fine. The show does have other viewer reports (${categoryText}) elsewhere — just not in this episode.`,
+  };
+}
+
 /**
  * Compute the pre-play verdict for an episode.
  *
@@ -129,13 +161,25 @@ export function computeVerdict(episode: Episode, seriesWarnings: Warning[] = [])
   const seriesInput = seriesWarnings.filter((w) => !w.suppressed);
   const allWarnings = [...episodeWarnings, ...seriesInput];
 
-  const blockingWarnings = allWarnings.filter((w) => isHardBlockCategory(w.category));
+  const allBlockingWarnings = allWarnings.filter((w) => isHardBlockCategory(w.category));
+  const episodeBlockingWarnings = episodeWarnings.filter((w) => isHardBlockCategory(w.category));
   const cautionWarnings = allWarnings.filter((w) => isCautionCategory(w.category));
   const seriesLevelWarnings = allWarnings.filter(isSeriesLevel);
 
   const hasTimedWarnings = episodeWarnings.some(
     (w) => w.scope === "episode" && (w.startFrac !== undefined || w.startSecAtSource !== undefined),
   );
+
+  // A human review is evidence about THIS episode; a series/season-scope
+  // hard-block warning is evidence about the show in general. When the
+  // episode has been reviewedClear, only an episode-scope hard-block warning
+  // counts as blocking here — that would be a direct contradiction of the
+  // review (someone logged a specific problem in the very episode a human
+  // signed off on), and we resolve that contradiction by blocking rather
+  // than trusting either side blindly. A series-level warning alone is not a
+  // contradiction — it's just outstanding context, surfaced separately via
+  // `seriesLevelWarnings` — so it does not override the review.
+  const blockingWarnings = episode.reviewedClear ? episodeBlockingWarnings : allBlockingWarnings;
 
   const shared = { blockingWarnings, cautionWarnings, seriesLevelWarnings, hasTimedWarnings };
 
@@ -150,13 +194,8 @@ export function computeVerdict(episode: Episode, seriesWarnings: Warning[] = [])
   }
 
   if (episode.reviewedClear) {
-    return {
-      tier: "reviewed-clear",
-      headline: "Reviewed clear",
-      detail: "A person watched this episode and confirmed there's nothing on your warning list.",
-      isUnknown: false,
-      ...shared,
-    };
+    const { headline, detail } = buildReviewedClearCopy(seriesLevelWarnings);
+    return { tier: "reviewed-clear", headline, detail, isUnknown: false, ...shared };
   }
 
   return {

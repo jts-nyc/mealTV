@@ -1,0 +1,31 @@
+{
+  "id": 88001,
+  "season_number": 1,
+  "name": "Season 1",
+  "episodes": [
+    {
+      "id": 5551001,
+      "episode_number": 1,
+      "name": "Pilot",
+      "overview": "Fictional pilot episode. Fixture data only.",
+      "runtime": 42,
+      "air_date": "2019-04-12"
+    },
+    {
+      "id": 5551002,
+      "episode_number": 2,
+      "name": "Second Helping",
+      "overview": "Fictional episode. Fixture data only. Runtime not yet known to TMDB.",
+      "runtime": null,
+      "air_date": "2019-04-19"
+    },
+    {
+      "id": 5551003,
+      "episode_number": 3,
+      "name": "Leftovers",
+      "overview": "Fictional episode. Fixture data only.",
+      "runtime": 45,
+      "air_date": "2019-04-26"
+    }
+  ]
+}

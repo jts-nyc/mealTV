@@ -183,6 +183,59 @@ describe("computeVerdict", () => {
     expect(effectiveEndSec(endNeither, 2000)).toBeUndefined();
   });
 
+  it("10. reviewedClear true + series-scope vomiting warning (no episode warnings) -> tier reviewed-clear, series warning still surfaced", () => {
+    const seriesVomiting = makeWarning({
+      category: "vomiting",
+      scope: "series",
+      severity: "high",
+      provenance: { type: "dtdd", confidence: 0.6, addedAt: "2026-01-01T00:00:00.000Z" },
+    });
+    const episode = makeEpisode({ reviewedClear: true, warnings: [] });
+    const verdict = computeVerdict(episode, [seriesVomiting]);
+
+    expect(verdict.tier).toBe("reviewed-clear");
+    expect(verdict.tier).not.toBe("block");
+    expect(verdict.isUnknown).toBe(false);
+    expect(verdict.blockingWarnings).toHaveLength(0);
+    expect(verdict.seriesLevelWarnings).toContainEqual(seriesVomiting);
+
+    // Copy stays honest: mentions the show's outstanding report, doesn't
+    // pretend the show is spotless.
+    const detail = verdict.detail.toLowerCase();
+    expect(detail).toContain("vomiting");
+    expect(detail).toContain("show");
+  });
+
+  it("11. reviewedClear false + series-scope vomiting warning (no episode warnings) -> STILL tier block (unchanged)", () => {
+    const seriesVomiting = makeWarning({
+      category: "vomiting",
+      scope: "series",
+      severity: "high",
+      provenance: { type: "dtdd", confidence: 0.6, addedAt: "2026-01-01T00:00:00.000Z" },
+    });
+    const episode = makeEpisode({ reviewedClear: false, warnings: [] });
+    const verdict = computeVerdict(episode, [seriesVomiting]);
+
+    expect(verdict.tier).toBe("block");
+    expect(verdict.blockingWarnings).toContainEqual(seriesVomiting);
+    expect(verdict.seriesLevelWarnings).toContainEqual(seriesVomiting);
+  });
+
+  it("12. reviewedClear true BUT a non-suppressed episode-scope vomiting warning -> tier block (contradiction)", () => {
+    const episodeVomiting = makeWarning({
+      category: "vomiting",
+      scope: "episode",
+      severity: "high",
+      provenance: { type: "curated", confidence: 0.95, addedAt: "2026-01-01T00:00:00.000Z" },
+    });
+    const episode = makeEpisode({ reviewedClear: true, warnings: [episodeVomiting] });
+    const verdict = computeVerdict(episode);
+
+    expect(verdict.tier).toBe("block");
+    expect(verdict.tier).not.toBe("reviewed-clear");
+    expect(verdict.blockingWarnings).toContainEqual(episodeVomiting);
+  });
+
   it("9. hasTimedWarnings is false when the only evidence is a series-scope warning", () => {
     const seriesWarning = makeWarning({
       category: "gore",

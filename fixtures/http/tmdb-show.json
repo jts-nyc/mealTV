@@ -1,0 +1,24 @@
+{
+  "id": 999901,
+  "name": "The Gravy Train",
+  "overview": "A wholly fictional prestige drama about a family-run roadside diner. Not a real show — used only as fixture data for mealTV's test suite.",
+  "first_air_date": "2019-04-12",
+  "number_of_seasons": 2,
+  "number_of_episodes": 5,
+  "seasons": [
+    {
+      "id": 88001,
+      "season_number": 1,
+      "name": "Season 1",
+      "episode_count": 3,
+      "air_date": "2019-04-12"
+    },
+    {
+      "id": 88002,
+      "season_number": 2,
+      "name": "Season 2",
+      "episode_count": 2,
+      "air_date": "2020-03-03"
+    }
+  ]
+}
