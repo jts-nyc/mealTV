@@ -1,0 +1,779 @@
+/*
+  mealTV web app styles.
+
+  Design brief: one-handed use on a phone, glanceable at arm's length next to
+  a plate, possibly in a dim room. Big tap targets, high contrast, calm by
+  default and LOUD only when it needs to be (watch-along incoming/active
+  states). No framework, hand-written, mobile-first.
+*/
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #f7f6f3;
+  --bg-elevated: #ffffff;
+  --text: #1a1a1a;
+  --text-dim: #5a5a5a;
+  --border: #ddd9d1;
+  --accent: #2b6cb0;
+
+  --block: #b3261e;
+  --block-bg: #fdecea;
+  --block-text: #7a1a14;
+
+  --caution: #a15c00;
+  --caution-bg: #fff4dc;
+  --caution-text: #6b3e00;
+
+  --clear: #1e7d3c;
+  --clear-bg: #e8f7ed;
+  --clear-text: #14522a;
+
+  --unknown: #5a5a5a;
+  --unknown-bg: #ececec;
+  --unknown-text: #333333;
+
+  --radius: 14px;
+  --tap-min: 48px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --bg-elevated: #1c1c1e;
+    --text: #f1f1f1;
+    --text-dim: #b0b0b0;
+    --border: #3a3a3c;
+    --accent: #6fa8dc;
+
+    --block: #ff6b60;
+    --block-bg: #3a1310;
+    --block-text: #ffb3ab;
+
+    --caution: #ffb84d;
+    --caution-bg: #3a2a05;
+    --caution-text: #ffd280;
+
+    --clear: #4fd67e;
+    --clear-bg: #0f2c18;
+    --clear-text: #8ff0ab;
+
+    --unknown: #b0b0b0;
+    --unknown-bg: #2a2a2c;
+    --unknown-text: #d4d4d4;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--accent);
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+
+header.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+header.top-bar h1 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.back-link {
+  font-size: 0.95rem;
+  text-decoration: none;
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 4px 4px 0;
+}
+
+/* -------------------------------------------------------------------- */
+/* Buttons / inputs                                                      */
+/* -------------------------------------------------------------------- */
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  min-height: var(--tap-min);
+  min-width: var(--tap-min);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.primary {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+button.ghost {
+  background: transparent;
+}
+
+.search-box {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Home / show list                                                      */
+/* -------------------------------------------------------------------- */
+
+.show-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.show-row {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  min-height: var(--tap-min);
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.show-row .title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.risk-chip {
+  flex: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.risk-chip.blocked {
+  background: var(--block-bg);
+  color: var(--block-text);
+}
+
+.risk-chip.flagged {
+  background: var(--caution-bg);
+  color: var(--caution-text);
+}
+
+.risk-chip.clear-ish {
+  background: var(--clear-bg);
+  color: var(--clear-text);
+}
+
+.risk-chip.unknown {
+  background: var(--unknown-bg);
+  color: var(--unknown-text);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(128, 128, 128, 0.18),
+    rgba(128, 128, 128, 0.18) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.empty-state,
+.loading-state,
+.error-state {
+  color: var(--text-dim);
+  padding: 24px 4px;
+  text-align: center;
+}
+
+.error-state {
+  color: var(--block-text);
+}
+
+/* -------------------------------------------------------------------- */
+/* Verdict banner (show.html)                                            */
+/* -------------------------------------------------------------------- */
+
+.verdict-banner {
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  margin: 16px 0;
+  border: 2px solid transparent;
+}
+
+.verdict-banner .headline {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.verdict-banner .detail {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.verdict-banner .icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.verdict-banner.block {
+  background: var(--block-bg);
+  color: var(--block-text);
+  border-color: var(--block);
+}
+
+.verdict-banner.caution {
+  background: var(--caution-bg);
+  color: var(--caution-text);
+  border-color: var(--caution);
+}
+
+.verdict-banner.reviewed-clear {
+  background: var(--clear-bg);
+  color: var(--clear-text);
+  border-color: var(--clear);
+}
+
+/* "no-data" MUST be visually distinct from "reviewed-clear" beyond color
+   alone (dealbreaker: grey must never look like an all-clear). We use a
+   diagonal-stripe pattern + a question-mark glyph, never the checkmark. */
+.verdict-banner.no-data {
+  background: var(--unknown-bg);
+  color: var(--unknown-text);
+  border-color: var(--unknown);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(128, 128, 128, 0.14),
+    rgba(128, 128, 128, 0.14) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+}
+
+/* -------------------------------------------------------------------- */
+/* Warning cards                                                         */
+/* -------------------------------------------------------------------- */
+
+.section-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin: 22px 0 8px;
+}
+
+.warning-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.warning-card .row1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.warning-card .category {
+  text-transform: capitalize;
+}
+
+.severity-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.severity-badge.low {
+  background: var(--clear-bg);
+  color: var(--clear-text);
+}
+
+.severity-badge.medium {
+  background: var(--caution-bg);
+  color: var(--caution-text);
+}
+
+.severity-badge.high {
+  background: var(--block-bg);
+  color: var(--block-text);
+}
+
+.channel-icon {
+  font-size: 1rem;
+}
+
+.warning-card .row2 {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.confidence-badge,
+.provenance-tag,
+.time-range {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+.series-section {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: var(--bg-elevated);
+}
+
+.series-section .hint {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin: 0 0 8px;
+}
+
+.coverage-note {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--unknown-bg);
+  color: var(--unknown-text);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Season / episode picker                                               */
+/* -------------------------------------------------------------------- */
+
+.season-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.season-tabs button {
+  flex: none;
+  padding: 8px 14px;
+}
+
+.season-tabs button.selected {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.episode-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.episode-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: var(--tap-min);
+  text-align: left;
+}
+
+.episode-row.selected {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.episode-row .ep-num {
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+  width: 2.6em;
+}
+
+.episode-row .ep-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.pager .page-info {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.jump-form {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.jump-form input[type="number"] {
+  width: 5.5em;
+  min-height: var(--tap-min);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  padding: 8px 10px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Watch-along                                                           */
+/* -------------------------------------------------------------------- */
+
+.watch-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.start-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.start-button {
+  font-size: 1.6rem;
+  font-weight: 800;
+  padding: 28px 48px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  width: 100%;
+  max-width: 320px;
+}
+
+.alert-stage {
+  border-radius: 0;
+  padding: 28px 20px;
+  text-align: center;
+  transition: background-color 0.25s ease;
+}
+
+.alert-stage .state-line {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+
+.alert-stage .sub-line {
+  font-size: 1.05rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.alert-stage.clear {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.alert-stage.incoming {
+  background: var(--caution-bg);
+  color: var(--caution-text);
+}
+
+.alert-stage.active {
+  background: var(--block-bg);
+  color: var(--block-text);
+}
+
+.alert-stage.safe-now {
+  background: var(--clear-bg);
+  color: var(--clear-text);
+}
+
+/* Flash: full-screen strobe overlay for "incoming"/"active", primary on iOS
+   where vibration isn't available at all. Respects reduced-motion. */
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: var(--block);
+  opacity: 0;
+  z-index: 50;
+}
+
+.flash-overlay.flashing {
+  animation: mealtv-flash 0.6s ease-in-out 3;
+}
+
+@keyframes mealtv-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-overlay.flashing {
+    animation: none;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+  }
+}
+
+.no-timer-banner {
+  background: var(--caution-bg);
+  color: var(--caution-text);
+  border: 2px solid var(--caution);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.watch-controls {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resync-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.resync-row button {
+  font-size: 1.2rem;
+  font-weight: 800;
+  min-width: 64px;
+}
+
+.resync-row .offset-readout {
+  min-width: 5em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+}
+
+.log-this-button {
+  background: var(--block);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 800;
+  padding: 20px;
+  border-radius: 16px;
+  border: none;
+}
+
+.log-category-picker {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.log-category-picker button {
+  flex: 1;
+}
+
+.log-confirmation {
+  text-align: center;
+  color: var(--clear-text);
+  font-weight: 600;
+}
+
+.microcopy {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 0 16px;
+}
+
+.elapsed-readout {
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.watch-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 16px 20px;
+  font-size: 0.9rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Export view                                                           */
+/* -------------------------------------------------------------------- */
+
+.log-entry-list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.log-entry-row .meta {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.log-entry-row button.delete {
+  color: var(--block-text);
+  background: var(--block-bg);
+  border-color: var(--block);
+  min-height: 40px;
+  padding: 6px 12px;
+}
+
+.export-textarea {
+  width: 100%;
+  min-height: 200px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  padding: 10px;
+}
+
+.cli-command {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.export-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0 18px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

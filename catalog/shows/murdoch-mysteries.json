@@ -1,0 +1,22 @@
+{
+  "slug": "murdoch-mysteries",
+  "title": "Murdoch Mysteries",
+  "seriesWarnings": [
+    {
+      "id": "seed-murdoch-mysteries-needles-medical-1",
+      "category": "needles_medical",
+      "severity": "low",
+      "channel": "video",
+      "scope": "series",
+      "note": "Recurring autopsy/coroner scenes are structural to this procedural's format. Research could NOT verify the actual graphic detail level of these scenes; this entry assumes a stylized, period-drama presentation rather than a visceral one, but that assumption is unconfirmed. Treat as low-confidence and consider previewing before relying on this rating.",
+      "suppressed": false,
+      "provenance": {
+        "type": "curated",
+        "confidence": 0.3,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Inferred from the show's known procedural/coroner format, not sourced from a specific episode review or crowd report. Low confidence is intentional -- this is an inference, not a finding."
+      }
+    }
+  ],
+  "seasons": []
+}

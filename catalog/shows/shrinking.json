@@ -1,0 +1,35 @@
+{
+  "slug": "shrinking",
+  "title": "Shrinking",
+  "seriesWarnings": [],
+  "seasons": [
+    {
+      "seasonNumber": 1,
+      "episodes": [
+        {
+          "episodeNumber": 6,
+          "reviewedClear": false,
+          "warnings": [
+            {
+              "id": "seed-shrinking-s01e06-vomiting-1",
+              "category": "vomiting",
+              "severity": "high",
+              "channel": "both",
+              "scope": "episode",
+              "startSecAtSource": 1405,
+              "endSecAtSource": 1446,
+              "note": "Approximate, community-sourced timestamp (~23:25-24:06) from a Does the Dog Die contributor who described this scene as strongly triggering. Not derived from a confirmed episode runtime, so no startFrac/endFrac is set here -- treat the countdown as approximate until confirmed against real episode data.",
+              "suppressed": false,
+              "provenance": {
+                "type": "dtdd",
+                "confidence": 0.8,
+                "addedAt": "2026-07-26T00:00:00.000Z",
+                "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). Single contributor-reported timestamp; episode runtime not verified."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

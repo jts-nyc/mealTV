@@ -9,9 +9,12 @@
   },
   "scripts": {
     "build": "tsc",
-    "build:web": "echo \"not yet implemented\"",
+    "build:web": "node --experimental-strip-types scripts/build-web.ts",
+    "build:web:dev": "node --experimental-strip-types scripts/build-web.ts --dev",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && npm run typecheck:web",
+    "typecheck:src": "tsc --noEmit",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json",
     "validate": "npm run build && node dist/cli/index.js validate",
     "catalog:build-index": "npm run build && node dist/cli/index.js build-index"
   },

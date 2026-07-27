@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>mealTV — Screening</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <a class="back-link" href="index.html">&larr; Shows</a>
+      <h1 id="show-title">Screening</h1>
+      <span></span>
+    </header>
+
+    <div id="status" class="loading-state">Loading show…</div>
+
+    <div id="content" hidden>
+      <div id="season-tabs" class="season-tabs"></div>
+      <div id="pager" class="pager" hidden>
+        <button id="prev-page" type="button">&larr; Prev</button>
+        <span id="page-info" class="page-info"></span>
+        <button id="next-page" type="button">Next &rarr;</button>
+      </div>
+      <form id="jump-form" class="jump-form" hidden>
+        <input id="jump-input" type="number" min="1" inputmode="numeric" placeholder="Ep #" aria-label="Jump to episode number" />
+        <button type="submit">Go</button>
+      </form>
+      <ul id="episode-list" class="episode-list"></ul>
+
+      <div id="verdict-section" hidden>
+        <div id="verdict-banner" class="verdict-banner"></div>
+
+        <div id="episode-warnings"></div>
+
+        <div id="series-section" class="series-section" hidden>
+          <p class="section-label" style="margin-top:0">Show-wide reports (no known scene time)</p>
+          <p class="hint">These apply to the show generally, not to a specific timestamp in this episode — they can't drive the watch-along countdown.</p>
+          <div id="series-warnings"></div>
+        </div>
+
+        <p id="coverage-note" class="coverage-note" hidden></p>
+
+        <div class="watch-links">
+          <a id="watch-link" class="back-link" href="#">Go to Watch-along mode &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/screen.js"></script>
+</body>
+</html>

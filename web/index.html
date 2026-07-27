@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>mealTV</title>
+  <meta name="description" content="Know what's coming before it ruins dinner." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <h1>mealTV</h1>
+      <a class="back-link" href="export.html">Log &amp; export</a>
+    </header>
+
+    <input
+      id="search-box"
+      class="search-box"
+      type="search"
+      inputmode="search"
+      placeholder="Search shows…"
+      aria-label="Search shows"
+    />
+
+    <div id="status" class="loading-state">Loading catalog…</div>
+    <ul id="show-list" class="show-list" hidden></ul>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

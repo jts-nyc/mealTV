@@ -1,1 +1,101 @@
-[]
+[
+  {
+    "slug": "cape-fear-1991",
+    "title": "Cape Fear (1991 film)",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 0,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "cape-fear-2026",
+    "title": "Cape Fear (2026 series)",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 0,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "futurama",
+    "title": "Futurama",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 1,
+    "reviewedClearCount": 0,
+    "hasVomiting": true
+  },
+  {
+    "slug": "murdoch-mysteries",
+    "title": "Murdoch Mysteries",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 1,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "rick-and-morty",
+    "title": "Rick and Morty",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 2,
+    "reviewedClearCount": 0,
+    "hasVomiting": true
+  },
+  {
+    "slug": "ride-or-die-2021",
+    "title": "Ride or Die (2021 film)",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 0,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "ride-or-die-2026",
+    "title": "Ride or Die (2026 series)",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 0,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "shrinking",
+    "title": "Shrinking",
+    "seasonCount": 1,
+    "episodeCount": 1,
+    "warningCount": 1,
+    "reviewedClearCount": 0,
+    "hasVomiting": true
+  },
+  {
+    "slug": "silo",
+    "title": "Silo",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 2,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  },
+  {
+    "slug": "ted-lasso",
+    "title": "Ted Lasso",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 1,
+    "reviewedClearCount": 0,
+    "hasVomiting": true
+  },
+  {
+    "slug": "tehran",
+    "title": "Tehran",
+    "seasonCount": 0,
+    "episodeCount": 0,
+    "warningCount": 0,
+    "reviewedClearCount": 0,
+    "hasVomiting": false
+  }
+]

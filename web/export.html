@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>mealTV — Log &amp; export</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <a class="back-link" href="index.html">&larr; Shows</a>
+      <h1>Log &amp; export</h1>
+      <span></span>
+    </header>
+
+    <p class="microcopy" style="text-align:left; padding:0 0 12px;">
+      Everything you've logged with "LOG THIS" during Watch-along, stored only on this device. Delete any
+      bad entries, then export and run the import command to fold them into the shared catalog.
+    </p>
+
+    <div id="status" class="loading-state" hidden></div>
+    <p id="empty-state" class="empty-state" hidden>Nothing logged yet. Entries you log during Watch-along will show up here.</p>
+
+    <ul id="log-list" class="log-entry-list"></ul>
+
+    <div id="export-panel" hidden>
+      <div class="export-actions">
+        <button id="export-button" class="primary" type="button">Build export JSON</button>
+        <button id="copy-button" type="button" hidden>Copy to clipboard</button>
+        <button id="download-button" type="button" hidden>Download .json</button>
+      </div>
+
+      <p class="section-label" id="cli-label" hidden style="margin-top:0">Then run</p>
+      <p id="cli-command" class="cli-command" hidden></p>
+
+      <p class="section-label" id="json-label" hidden>Export JSON</p>
+      <textarea id="export-textarea" class="export-textarea" readonly hidden></textarea>
+      <p id="copy-confirmation" class="log-confirmation" hidden>Copied.</p>
+    </div>
+  </div>
+
+  <script type="module" src="src/export-page.js"></script>
+</body>
+</html>

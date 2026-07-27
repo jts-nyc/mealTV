@@ -1,0 +1,22 @@
+{
+  "slug": "ted-lasso",
+  "title": "Ted Lasso",
+  "seriesWarnings": [
+    {
+      "id": "seed-ted-lasso-vomiting-1",
+      "category": "vomiting",
+      "severity": "low",
+      "channel": "both",
+      "scope": "series",
+      "note": "A character vomits during a group scene; this reads as an isolated beat rather than a recurring gag in the show.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.6,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). No episode-level timestamp available."
+      }
+    }
+  ],
+  "seasons": []
+}

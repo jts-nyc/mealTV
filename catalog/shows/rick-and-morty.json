@@ -1,0 +1,37 @@
+{
+  "slug": "rick-and-morty",
+  "title": "Rick and Morty",
+  "seriesWarnings": [
+    {
+      "id": "seed-rick-and-morty-vomiting-1",
+      "category": "vomiting",
+      "severity": "high",
+      "channel": "both",
+      "scope": "series",
+      "note": "Gross-out humor including vomiting is a recurring feature throughout the series rather than an isolated incident.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.9,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). No episode-level timestamps available."
+      }
+    },
+    {
+      "id": "seed-rick-and-morty-body-horror-1",
+      "category": "body_horror",
+      "severity": "high",
+      "channel": "video",
+      "scope": "series",
+      "note": "Body horror is a recurring feature of the series; the \"Pickle Rick\" episode is widely cited by viewers as a peak example. No verified episode number or timestamp for that episode is recorded here -- treat this as a series-wide caution, not a pointer to a specific scene.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.9,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). No episode-level timestamps available."
+      }
+    }
+  ],
+  "seasons": []
+}
