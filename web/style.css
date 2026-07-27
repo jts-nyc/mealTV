@@ -86,6 +86,20 @@ a {
   color: var(--accent);
 }
 
+/*
+  Several elements below are toggled via the plain `hidden` DOM property
+  (e.g. `el.hidden = true`) but also carry a class like `.pager` or
+  `.watch-links` that sets `display: flex`. Without this rule, that class
+  selector and the browser's built-in `[hidden] { display: none }` rule have
+  equal specificity, and the author rule wins by source order -- so the
+  element stays visible (flexed) even though `.hidden` is true. This single
+  rule outranks any `display` set elsewhere in this file, so `hidden` always
+  actually hides the element, everywhere.
+*/
+[hidden] {
+  display: none !important;
+}
+
 .app {
   max-width: 640px;
   margin: 0 auto;
@@ -366,8 +380,17 @@ button.ghost {
 }
 
 .severity-badge.high {
-  background: var(--block-bg);
-  color: var(--block-text);
+  /* Deliberately still the caution palette, not --block-*: severity is a
+     property of the individual warning, independent of whether its category
+     is a hard block (vomiting) or graded/caution (gore, blood, body horror,
+     etc. -- see HARD_BLOCK_CATEGORIES in src/verdict/policy.ts). A "high
+     severity" caution-category warning (e.g. body horror) must never render
+     in the same red as an actual block, or the badge would visually lie
+     about whether this is a hard stop. The verdict banner's block/caution
+     classes are the only thing allowed to use --block colors. */
+  background: var(--caution-bg);
+  color: var(--caution-text);
+  border: 1px solid var(--caution);
 }
 
 .channel-icon {

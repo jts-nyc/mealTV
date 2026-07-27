@@ -18,7 +18,7 @@
               "scope": "episode",
               "startSecAtSource": 1405,
               "endSecAtSource": 1446,
-              "note": "Approximate, community-sourced timestamp (~23:25-24:06) from a Does the Dog Die contributor who described this scene as strongly triggering. Not derived from a confirmed episode runtime, so no startFrac/endFrac is set here -- treat the countdown as approximate until confirmed against real episode data.",
+              "note": "Approximate, community-sourced timestamp (~23:25-24:06) from a Does the Dog Die contributor who described this scene as strongly triggering. Nobody here has confirmed it against the actual episode yet, so treat the countdown as a rough estimate, not an exact cue.",
               "suppressed": false,
               "provenance": {
                 "type": "dtdd",

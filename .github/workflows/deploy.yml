@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
+      - main
       - claude/tv-content-filtering-thhfp2
   workflow_dispatch:
 

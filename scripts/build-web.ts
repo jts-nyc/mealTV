@@ -84,6 +84,21 @@ async function main(): Promise<void> {
     log("copied style.css");
   }
 
+  // 2b. Copy the web app manifest + home-screen icons (favicon, apple-touch-icon,
+  // maskable icon) so "Add to Home Screen" has a name/icon to install with.
+  const PWA_ASSETS = ["manifest.webmanifest", "favicon.svg", "apple-touch-icon.png", "icon-512-maskable.png"];
+  let copiedAssets = 0;
+  for (const asset of PWA_ASSETS) {
+    const src = path.join(webDir, asset);
+    if (existsSync(src)) {
+      cpSync(src, path.join(distDir, asset));
+      copiedAssets++;
+    } else {
+      log(`WARNING: expected PWA asset not found: web/${asset}`);
+    }
+  }
+  log(`copied ${copiedAssets}/${PWA_ASSETS.length} PWA asset(s) (manifest + icons)`);
+
   // 3. Copy the catalog JSON so runtime fetch("catalog/...") calls resolve.
   if (existsSync(catalogDir)) {
     cpSync(catalogDir, path.join(distDir, "catalog"), { recursive: true });
