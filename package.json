@@ -11,7 +11,9 @@
     "build": "tsc",
     "build:web": "echo \"not yet implemented\"",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run build && node dist/cli/index.js validate",
+    "catalog:build-index": "npm run build && node dist/cli/index.js build-index"
   },
   "dependencies": {
     "commander": "^15.0.0",
