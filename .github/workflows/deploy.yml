@@ -27,18 +27,39 @@ jobs:
           node-version: 22
           cache: npm
 
-      - uses: actions/configure-pages@v5
+      # Pages is only available on private repos with a paid plan. On the free
+      # tier this repo must be public for Pages to exist at all. Rather than
+      # failing every push until that decision is made, detect it and skip the
+      # deploy: `enablement: true` provisions Pages automatically the moment
+      # the repo becomes eligible.
+      - id: pages
+        uses: actions/configure-pages@v5
+        continue-on-error: true
+        with:
+          enablement: true
+
+      - if: steps.pages.outcome != 'success'
+        run: |
+          echo "::warning::GitHub Pages is not enabled for this repository, so the site was not deployed."
+          echo "Enable it under Settings -> Pages -> Source: GitHub Actions."
+          echo "On the free plan that requires the repository to be public."
 
       - run: npm ci
       # `build:web` compiles the static mobile web app and emits it to web-dist/.
+      # Always built, even when Pages is unavailable, so a broken build still fails CI.
       - run: npm run build:web
 
-      - uses: actions/upload-pages-artifact@v3
+      - if: steps.pages.outcome == 'success'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: web-dist
 
+    outputs:
+      pages_ready: ${{ steps.pages.outcome }}
+
   deploy:
     needs: build
+    if: needs.build.outputs.pages_ready == 'success'
     runs-on: ubuntu-latest
     permissions:
       pages: write
