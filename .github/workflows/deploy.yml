@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/tv-content-filtering-thhfp2
   workflow_dispatch:
 
 permissions:
@@ -27,16 +26,16 @@ jobs:
           node-version: 22
           cache: npm
 
-      # Pages is only available on private repos with a paid plan. On the free
-      # tier this repo must be public for Pages to exist at all. Rather than
-      # failing every push until that decision is made, detect it and skip the
-      # deploy: `enablement: true` provisions Pages automatically the moment
-      # the repo becomes eligible.
+      # Pages must be turned on by hand: Settings -> Pages -> Source: GitHub
+      # Actions. It cannot be provisioned from here — configure-pages'
+      # `enablement: true` calls the create-Pages-site API, which GITHUB_TOKEN
+      # is not permitted to use ("Resource not accessible by integration")
+      # even with `pages: write`. On the free plan the repo must also be
+      # public. Until that's done, skip the deploy instead of failing every
+      # push.
       - id: pages
         uses: actions/configure-pages@v5
         continue-on-error: true
-        with:
-          enablement: true
 
       - if: steps.pages.outcome != 'success'
         run: |
