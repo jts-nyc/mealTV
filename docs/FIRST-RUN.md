@@ -20,10 +20,16 @@ the shows you watch and what's flagged in them — is publicly readable.
 Nothing about that is sensitive by default, but it means you should never put
 anything private in a warning's `note` field.
 
-You only need to run the workflow by hand once. After that, every push to
-`main` deploys automatically — the workflow re-provisions Pages itself once
-the repo is eligible, so you won't need to repeat step 2 if you ever
-toggle visibility again.
+Step 2 is not optional and cannot be automated. The workflow has no way to
+turn Pages on for you — creating a Pages site needs permissions the Actions
+token doesn't have — so if you skip it the deploy just skips itself with a
+warning and no site ever appears. Once it's set, every push to `main`
+deploys automatically and you won't need to run the workflow by hand again.
+
+A gotcha worth knowing: because the deploy step is deliberately
+non-blocking, a run where Pages isn't configured still shows up **green**.
+If the site isn't updating, open the newest "Deploy to GitHub Pages" run and
+check whether the `deploy` job actually ran or was skipped.
 
 ## Step 1 — put it on your phone
 
