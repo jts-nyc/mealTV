@@ -17,6 +17,10 @@ playback, read the video stream, or know what's currently on screen. The
 phone app is a manual, best-effort companion: you tell it what you're
 watching and roughly where you are, and it does the rest.
 
+**First time here?** Start with [`docs/FIRST-RUN.md`](docs/FIRST-RUN.md) — a
+short, linear quickstart to get this running at dinner tonight. This README
+is the reference manual.
+
 ## Limitations — read this before trusting it
 
 This is the most important section in this document. mealTV is a heuristic
@@ -126,6 +130,16 @@ parsed from each filename's `SxxEyy` pattern:
 node dist/cli/index.js scan-subtitles severance --dir ~/Downloads/severance-s01-subs/
 ```
 
+Don't have a subtitle file yet? `fetch-subtitles` downloads one (Podnapisi by
+default, no key needed) and runs the same scan. Always pass
+`--hearing-impaired` — only SDH/hearing-impaired tracks reliably carry the
+bracketed `[retching]`-style cues the scanner looks for; a plain dialogue
+track will usually turn up nothing.
+
+```bash
+node dist/cli/index.js fetch-subtitles severance --season 1 --episode 1 --hearing-impaired
+```
+
 **4. Curate a warning by hand.** For anything the scanner missed, or content
 where you already know exactly what's in it.
 
@@ -168,20 +182,20 @@ npm run validate              # schema-validate every show file, per-show report
 
 ## Deploying to your phone
 
-1. In the GitHub repo, go to **Settings → Pages → Source** and choose
+1. **Make the repo public.** GitHub Pages on the free tier requires a public
+   repository — **Settings → General → Change repository visibility →
+   Public.** That means `catalog/**` — the list of shows you watch and what's
+   flagged in them — is publicly visible. Nothing in there is sensitive, but
+   it is a conscious tradeoff: don't put anything in a warning's `note` field
+   you wouldn't want public.
+2. In the GitHub repo, go to **Settings → Pages → Source** and choose
    **GitHub Actions**.
-2. Push to the branch this repo deploys from — `.github/workflows/deploy.yml`
+3. Push to the branch this repo deploys from — `.github/workflows/deploy.yml`
    builds the web app (`npm run build:web`, output `web-dist/`) and publishes
    it via GitHub Pages on every push, or on demand via
    **Actions → Deploy to GitHub Pages → Run workflow**.
-3. Open the published URL on your phone's browser and add it to your home
+4. Open the published URL on your phone's browser and add it to your home
    screen, so it opens full-screen like an app.
-
-**GitHub Pages on the free tier requires a public repository.** That means
-`catalog/**` — the list of shows you watch and what's flagged in them — is
-publicly visible. Nothing in there is sensitive, but it is a conscious
-tradeoff: don't put anything in a warning's `note` field you wouldn't want
-public.
 
 ## A note on subtitle files
 
