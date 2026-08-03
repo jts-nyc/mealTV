@@ -1,0 +1,22 @@
+{
+  "slug": "futurama",
+  "title": "Futurama",
+  "seriesWarnings": [
+    {
+      "id": "seed-futurama-vomiting-1",
+      "category": "vomiting",
+      "severity": "medium",
+      "channel": "both",
+      "scope": "series",
+      "note": "Vomiting is a recurring comedic gag associated with a particular character; played for laughs and less visceral than live-action depictions.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.75,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). Crowd vote of 29 'yes' responses on the relevant DTDD topic; no episode-level timestamps available."
+      }
+    }
+  ],
+  "seasons": []
+}

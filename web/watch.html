@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>mealTV — Watch-along</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f6f3" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="mealTV" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="flash-overlay" class="flash-overlay" aria-hidden="true"></div>
+
+  <div class="watch-app">
+    <header class="top-bar" style="padding:16px 16px 0">
+      <a class="back-link" href="#" id="back-link">&larr; Episode</a>
+      <h1 id="episode-title" style="font-size:1rem">Watch-along</h1>
+      <span></span>
+    </header>
+
+    <div id="status" class="loading-state">Loading…</div>
+
+    <div id="content" hidden>
+      <div id="start-screen" class="start-screen">
+        <p id="episode-summary"></p>
+        <button id="start-button" class="start-button" type="button">START</button>
+        <p class="microcopy">
+          Tap START the moment the episode begins playing on the TV. Timings are estimates from subtitles or
+          reports and can drift by several seconds against whatever cut is actually streaming — use the
+          resync buttons below if it feels off.
+        </p>
+      </div>
+
+      <div id="running-screen" hidden>
+        <div id="no-timer-banner" class="no-timer-banner" hidden>
+          Stay alert — this show has reports but no known scene times. We can't run a countdown for it.
+        </div>
+
+        <div id="alert-stage" class="alert-stage clear">
+          <p id="state-line" class="state-line">All clear</p>
+          <p id="sub-line" class="sub-line"></p>
+        </div>
+
+        <p id="elapsed-readout" class="elapsed-readout"></p>
+
+        <div class="watch-controls">
+          <div class="resync-row">
+            <button id="resync-minus" type="button" aria-label="Shift timings 5 seconds earlier">−5s</button>
+            <span id="offset-readout" class="offset-readout">offset: 0s</span>
+            <button id="resync-plus" type="button" aria-label="Shift timings 5 seconds later">+5s</button>
+          </div>
+
+          <label style="display:flex; align-items:center; gap:8px; justify-content:center; font-size:0.9rem;">
+            <input id="sound-toggle" type="checkbox" style="width:20px;height:20px;" />
+            Sound on
+          </label>
+
+          <div class="resync-row">
+            <button id="lead-time-minus" type="button" aria-label="Warn me with less lead time">−5s</button>
+            <span id="lead-time-readout" class="offset-readout">lead time: 15s</span>
+            <button id="lead-time-plus" type="button" aria-label="Warn me with more lead time">+5s</button>
+          </div>
+
+          <button id="log-this-button" class="log-this-button" type="button">LOG THIS</button>
+          <div id="log-category-picker" class="log-category-picker" hidden>
+            <button data-category="vomiting" type="button">Vomiting</button>
+            <button data-category="gore" type="button">Gore</button>
+            <button data-category="other" type="button">Other</button>
+          </div>
+          <p id="log-confirmation" class="log-confirmation" hidden></p>
+
+          <p class="microcopy">
+            "LOG THIS" records the moment a few seconds back, since reactions land a beat late. Entries are
+            saved on this device — review and export them from the Log &amp; export page.
+          </p>
+        </div>
+
+        <div class="watch-links">
+          <a href="export.html">Log &amp; export &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/watch.js"></script>
+</body>
+</html>

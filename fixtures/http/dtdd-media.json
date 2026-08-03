@@ -1,0 +1,42 @@
+{
+  "id": 42001,
+  "name": "The Gravy Train",
+  "note": "Wholly fictional show and vote counts — fixture data only, for mealTV's test suite.",
+  "topicItemStats": [
+    {
+      "topicId": 1,
+      "topicName": "Vomit",
+      "yesSum": 18,
+      "noSum": 2,
+      "numComments": 4
+    },
+    {
+      "topicId": 2,
+      "topicName": "Graphic Violence / Gore",
+      "yesSum": 9,
+      "noSum": 6,
+      "numComments": 1
+    },
+    {
+      "topicId": 3,
+      "topicName": "Needles / Medical Content",
+      "yesSum": 4,
+      "noSum": 1,
+      "numComments": 0
+    },
+    {
+      "topicId": 4,
+      "topicName": "Does a Dog Die",
+      "yesSum": 7,
+      "noSum": 3,
+      "numComments": 2
+    },
+    {
+      "topicId": 5,
+      "topicName": "Emetophobia Trigger (implied only, off-screen)",
+      "yesSum": 0,
+      "noSum": 9,
+      "numComments": 0
+    }
+  ]
+}

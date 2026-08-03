@@ -1,0 +1,35 @@
+{
+  "slug": "test-show-broken",
+  "title": "Test Show Broken",
+  "seriesWarnings": [],
+  "seasons": [
+    {
+      "seasonNumber": 1,
+      "episodes": [
+        {
+          "episodeNumber": 1,
+          "title": "Pilot",
+          "runtimeSec": 2640,
+          "reviewedClear": false,
+          "warnings": [
+            {
+              "id": "test-show-broken-s01e01-bad-01",
+              "category": "disgusting",
+              "severity": "high",
+              "channel": "video",
+              "scope": "episode",
+              "startFrac": 1.5,
+              "endFrac": 0.7,
+              "suppressed": false,
+              "provenance": {
+                "type": "curated",
+                "confidence": 0.9,
+                "addedAt": "2026-02-02T10:00:00.000Z"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

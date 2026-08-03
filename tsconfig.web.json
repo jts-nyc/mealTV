@@ -1,0 +1,12 @@
+{
+  "//": "Type-checking scope for the web app + its build script + its tests. The root tsconfig.json's `include` is deliberately scoped to `src` only (owned by the CLI/catalog side of this repo), so this sibling config covers `web/`, `scripts/build-web.ts`, and `test/web-*.test.ts` without touching the shared root config. Run via `npx tsc --noEmit -p tsconfig.web.json`.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./.tsc-web-out",
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["web/**/*.ts", "scripts/build-web.ts", "test/web-*.test.ts"],
+  "exclude": ["node_modules", "dist", "web-dist", ".tsc-web-out"]
+}

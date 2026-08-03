@@ -1,0 +1,37 @@
+{
+  "slug": "silo",
+  "title": "Silo",
+  "seriesWarnings": [
+    {
+      "id": "seed-silo-blood-1",
+      "category": "blood",
+      "severity": "medium",
+      "channel": "video",
+      "scope": "series",
+      "note": "Some blood present but not excessive; present from episode 1 onward.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.6,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). No episode-level timestamp available."
+      }
+    },
+    {
+      "id": "seed-silo-gore-1",
+      "category": "gore",
+      "severity": "medium",
+      "channel": "video",
+      "scope": "series",
+      "note": "Includes a surgery scene performed on a live animal with visible blood, and a corpse shown with a knife wound.",
+      "suppressed": false,
+      "provenance": {
+        "type": "dtdd",
+        "confidence": 0.6,
+        "addedAt": "2026-07-26T00:00:00.000Z",
+        "detail": "Seeded from Does the Dog Die community research (manual pre-fetch pass, not a live API call). No episode-level timestamp available."
+      }
+    }
+  ],
+  "seasons": []
+}

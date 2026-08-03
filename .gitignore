@@ -1,0 +1,14 @@
+node_modules/
+dist/
+web-dist/
+.env
+subtitles/incoming/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# editors
+.vscode/
+.idea/
+*.swp
